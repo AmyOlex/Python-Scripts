@@ -10,9 +10,12 @@
 # and any other processing tools such as samtools that were used to obtain the final BAM files.  This script also
 # parses out whether or not the BAM file contains unmapped reads, if it marks duplicates and if in includes failed reads.
 # 
-# 9/15/14
+# UPDATED: 9/15/14
 # Specilazation:  This script was modified from the above to parse out ALL clinical fields from the TCGA XML Clinical files.
 # The strategy is to put those with the same namespace together.
+# 
+# UPDATED: 2/2/2016
+# Updated line 54 so that is is no longer specific to the xml schema version used by TCGA.  Further updates on XML schema should nolonger break this script.
 ###############
 
 
@@ -47,7 +50,7 @@ def parse_and_get_ns(file):
 
 
 def parse_tag(tag):
-   mo = re.match("{http://tcga.nci/bcr/xml/clinical/(.*)2\.6.*}(.*)", tag)
+   mo = re.match("{http://tcga.nci/bcr/xml/clinical/(.*/).*}(.*)", tag)
    new_tag = ''.join(mo.groups()) if mo is not None else ''
    return new_tag
 
